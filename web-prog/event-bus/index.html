@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script type="text/javascript" src="event_bus.js"></script>
+
+<button onclick="handler()">Try it</button>
+
+<button onclick="yab()">Timeout test</button>
+
+<script>
+function handler() {
+    eventBus.register((arg) => {console.log(arg)}, "trigger")
+    recRun(0)
+    // for (let i = 0; i < 3000000; i++) {
+    //     setTimeout(function(){
+    //         eventBus.event("trigger", "event {i} triggered")
+    //     }, 10)
+    // }
+}
+
+function recRun(i){
+    setTimeout(function(){
+            eventBus.event("trigger", "event {i} triggered")
+    }, 10)
+    if (i < 3000000) {
+        recRun(i++)
+    }
+}
+
+
+function yab() {
+    console.log("timeout worked")
+}
+</script>
+
+</body>
+</html>
