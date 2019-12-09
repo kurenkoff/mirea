@@ -2,6 +2,7 @@ package model
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 )
@@ -41,6 +42,14 @@ func GetCollection() ([]byte, error) {
 
 }
 
-func Remove(id int) {
-	players = append(players[:id], players[(id+1):]...)
+func Remove(ids []string) {
+	fmt.Println(players, ids)
+	for _, id := range ids{
+		for i, player := range players{
+			if player.ID == id {
+				players = append(players[:i], players[(i+1):]...)
+				break
+			}
+		}
+	}
 }

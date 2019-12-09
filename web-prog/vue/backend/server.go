@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"strconv"
+	"strings"
 
 	"mirea.com/web-prog/model"
 
@@ -15,9 +15,9 @@ import (
 func main(){
 	router := mux.NewRouter()
 	router.HandleFunc("/get", handlerGet).Methods(http.MethodGet)
-	router.HandleFunc("/delete/{id}", handleDelete).Methods(http.MethodDelete)
+	router.HandleFunc("/delete/{ids}", handleDelete).Methods(http.MethodDelete, http.MethodPost)
 
-	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type"})
+	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Access-Control-Allow-Origin"})
 	corsObj := handlers.AllowedOrigins([]string{"*"})
 
 
@@ -50,12 +50,8 @@ func handleDelete(w http.ResponseWriter, r *http.Request) {
 			_, _ = fmt.Fprintf(w, "error: %v", err.Error())
 		}
 	}()
+	rawIDs := mux.Vars(r)["ids"]
 
-	rawID := mux.Vars(r)["id"]
-	id, err := strconv.Atoi(rawID)
-	if err != nil {
-		return
-	}
-
-	model.Remove(id)
+	fmt.Println(rawIDs)
+	model.Remove(strings.Split(rawIDs, ","))
 }
