@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <ul id="player-list">
-            <li v-for="item in this.$store.getters.allPlayers" v-bind:key="item.id">
+    <div class="playerList">
+        <ul class="list" id="player-list">
+            <li  v-for="item in this.$store.getters.allPlayers" v-bind:key="item.id">
                 <Player v-bind:id="item.id"/>
             </li>
         </ul>
@@ -28,5 +28,14 @@
 </script>
 
 <style scoped>
+.playerList{
+    width: 50%;
+    margin: auto;
+}
+
+.list{
+    list-style-type: none;
+    margin:20px;
+}
 
 </style>

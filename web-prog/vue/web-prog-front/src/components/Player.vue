@@ -1,8 +1,10 @@
 <template>
-   <div>
-       Name:{{player.id}}
-       Position:{{player.position}}
-       Nationality:{{player.nationality}}
+   <div class="card">
+       <div class="player">
+           Name: {{player.id}}<br/>
+           Position: {{player.position}}<br/>
+           Nationality: {{player.nationality}}<br/>
+       </div>
        <input type="checkbox" @change="sendChange">
    </div>
 </template>
@@ -29,5 +31,9 @@
 </script>
 
 <style scoped>
-
+.card{
+    border-style: solid;
+    border-width: 2px;
+    text-align: center;
+}
 </style>
